@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="432" height="432" viewBox="0 0 108 108">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="108" y2="108" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#13254E"/><stop offset="1" stop-color="#070F22"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="18" y1="18" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5AB2FF"/><stop offset="1" stop-color="#2B86F5"/>
+    </linearGradient>
+    <linearGradient id="pin" x1="31" y1="20" x2="77" y2="88" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#56AEFF"/><stop offset="1" stop-color="#2B86F5"/>
+    </linearGradient>
+    <clipPath id="mask"><rect x="0" y="0" width="108" height="108" rx="24"/></clipPath>
+  </defs>
+  <g>
+  <rect width="108" height="108" fill="url(#bg)"/>
+  <path fill="url(#ring)" fill-rule="evenodd" d="M54,54 m-33,0 a33,33 0 1,0 66,0 a33,33 0 1,0 -66,0 z M54,54 m-28,0 a28,28 0 1,0 56,0 a28,28 0 1,0 -56,0 z"/>
+  <g transform="translate(54,54) scale(0.68) translate(-54,-54)">
+    <path fill="url(#pin)" fill-rule="evenodd" d="M54,20 C41.3,20 31,30.3 31,43 C31,52.5 37.5,63.5 54,88 C70.5,63.5 77,52.5 77,43 C77,30.3 66.7,20 54,20 Z M42,33 h24 a5,5 0 0,1 5,5 v13 a5,5 0 0,1 -5,5 h-13 l-8,7 v-7 h-3 a5,5 0 0,1 -5,-5 v-13 a5,5 0 0,1 5,-5 z"/>
+    <path fill="#7DD8F7" d="M45.5,41 m-3.2,0 a3.2,3.2 0 1,0 6.4,0 a3.2,3.2 0 1,0 -6.4,0 z M54,41 m-3.2,0 a3.2,3.2 0 1,0 6.4,0 a3.2,3.2 0 1,0 -6.4,0 z M62.5,41 m-3.2,0 a3.2,3.2 0 1,0 6.4,0 a3.2,3.2 0 1,0 -6.4,0 z"/>
+  </g>
+  </g>
+</svg>

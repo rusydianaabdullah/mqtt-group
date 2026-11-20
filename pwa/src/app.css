@@ -1,0 +1,222 @@
+@import 'tailwindcss';
+
+/*
+ * The Android app's palette, transposed. Deep blue for anything you can press, cyan held back
+ * for the things that mean "now" — someone is live, a message is unread, the connection is up.
+ * That only works as a signal because nothing else on the screen is that colour.
+ *
+ * The accent needs a different weight per theme: #22d3ee is barely visible on white and the
+ * darker cyan disappears into a black ground. Same hue, two brightnesses.
+ */
+@theme {
+	--font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+	--color-brand: #2563eb;
+	--color-brand-bright: #3b82f6;
+	--color-brand-deep: #1e3a8a;
+	--color-accent-light: #0891b2;
+	--color-accent-dark: #22d3ee;
+}
+
+/*
+ * Semantic tokens, named after the Material roles the Kotlin theme uses, so a screen ported
+ * from one to the other is a translation and not a redesign. Light is the base; dark
+ * redefines only what changes.
+ */
+:root {
+	color-scheme: light dark;
+
+	--surface: #ffffff;
+	--surface-1: #f1f5f9;
+	--surface-2: #e2e8f0;
+	--background: #f8fafc;
+	--on-surface: #0f172a;
+	--on-surface-muted: #64748b;
+	--outline: #cbd5e1;
+	--outline-variant: #e2e8f0;
+	--primary: #2563eb;
+	--on-primary: #ffffff;
+	--primary-container: #dbeafe;
+	--on-primary-container: #1e3a8a;
+	--accent: #0891b2;
+	--on-accent: #ffffff;
+	--error: #dc2626;
+	--on-error: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) {
+		--surface: #08090c;
+		--surface-1: #12141a;
+		--surface-2: #1b1e26;
+		--background: #08090c;
+		--on-surface: #e6e9ef;
+		--on-surface-muted: #98a0ae;
+		--outline: #2c313b;
+		--outline-variant: #1b1e26;
+		--primary: #3b82f6;
+		--on-primary: #06152e;
+		--primary-container: #1e3a8a;
+		--on-primary-container: #dbeafe;
+		--accent: #22d3ee;
+		--on-accent: #08090c;
+		--error: #f87171;
+		--on-error: #450a0a;
+	}
+}
+
+:root[data-theme='dark'] {
+	--surface: #08090c;
+	--surface-1: #12141a;
+	--surface-2: #1b1e26;
+	--background: #08090c;
+	--on-surface: #e6e9ef;
+	--on-surface-muted: #98a0ae;
+	--outline: #2c313b;
+	--outline-variant: #1b1e26;
+	--primary: #3b82f6;
+	--on-primary: #06152e;
+	--primary-container: #1e3a8a;
+	--on-primary-container: #dbeafe;
+	--accent: #22d3ee;
+	--on-accent: #08090c;
+	--error: #f87171;
+	--on-error: #450a0a;
+}
+
+html,
+body {
+	height: 100%;
+	/* Never reflow text bigger on a rotate, the way a mobile browser does for a page it thinks
+	   is a desktop site. */
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}
+
+/*
+ * No double-tap-to-zoom delay on anything meant to be tapped. Without it a browser waits to see
+ * whether a second tap is coming, which reads as a sluggish button and occasionally as a zoom.
+ */
+a,
+button,
+input,
+select,
+textarea,
+label,
+summary {
+	touch-action: manipulation;
+}
+
+/*
+ * 16px minimum for anything focusable on a touch screen.
+ *
+ * This is the rule behind the app "zooming in by itself": iOS Safari zooms to a focused field
+ * whose text is under 16px, and it does not zoom back out afterwards — so tapping the message
+ * box left the whole app magnified. Deliberately unlayered, which puts it above Tailwind's
+ * utilities, so a `text-xs` on a compact select on the map screen cannot reintroduce it.
+ */
+@media (pointer: coarse) {
+	input,
+	select,
+	textarea {
+		font-size: 16px;
+	}
+}
+
+body {
+	background: var(--background);
+	color: var(--on-surface);
+	font-family: var(--font-sans);
+	/* Tighter tracking and heavier headings than the browser default, matching the Kotlin
+	   typography, which is tuned for an app this size rather than a much larger one. */
+	-webkit-font-smoothing: antialiased;
+	overscroll-behavior-y: none;
+}
+
+/*
+ * A screen's own scroll region. The app column is exactly one viewport tall and does not
+ * scroll, so whatever is long has to scroll inside itself — otherwise it grows the column and
+ * pushes anything below it, such as the chat composer, off the bottom of the screen.
+ *
+ * `min-height: 0` is the half that is easy to miss: a flex child's default `min-height: auto`
+ * refuses to shrink below its content, and `overflow-y: auto` on a box that never shrinks
+ * never scrolls.
+ */
+main {
+	min-height: 0;
+	overflow-y: auto;
+	overscroll-behavior-y: contain;
+}
+
+h1,
+h2,
+h3 {
+	font-weight: 700;
+	letter-spacing: -0.02em;
+}
+
+/*
+ * A small set of component classes rather than repeating the same six Tailwind utilities on
+ * every button. The Android app gets these from Material 3; here they are written once.
+ */
+@layer components {
+	.surface {
+		background: var(--surface-1);
+		border: 1px solid var(--outline);
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		border-radius: 0.75rem;
+		padding: 0.625rem 1rem;
+		font-weight: 600;
+		font-size: 0.875rem;
+		cursor: pointer;
+		border: 1px solid transparent;
+		transition: opacity 120ms ease;
+	}
+
+	.btn:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+
+	.btn-primary {
+		background: var(--primary);
+		color: var(--on-primary);
+	}
+
+	.btn-quiet {
+		background: transparent;
+		color: var(--on-surface);
+		border-color: var(--outline);
+	}
+
+	.btn-danger {
+		background: transparent;
+		color: var(--error);
+		border-color: var(--error);
+	}
+
+	.field {
+		width: 100%;
+		border-radius: 0.75rem;
+		border: 1px solid var(--outline);
+		background: var(--surface);
+		color: var(--on-surface);
+		padding: 0.625rem 0.75rem;
+		font-size: 1rem;
+	}
+
+	.field:focus {
+		outline: 2px solid var(--primary);
+		outline-offset: -1px;
+	}
+
+	.muted {
+		color: var(--on-surface-muted);
+	}
+}

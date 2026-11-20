@@ -1,0 +1,31 @@
+# Gradle / Android build output
+.gradle/
+build/
+.kotlin/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+**/app/release/
+
+# IDE
+*.iml
+.idea/
+
+# Signing material and secrets: never commit these
+*.apk
+*.aab
+*.keystore
+*.jks
+keystore.properties
+google-services.json
+.env
+.env.*
+!.env.example
+
+# Editor swap files (a stray .keystore.properties.swp is a copy of signing credentials)
+*.swp
+*.swo
+*~
+.DS_Store
+secrets.properties

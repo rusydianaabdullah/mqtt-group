@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Kept for any launcher that ignores the adaptive background drawable. -->
+    <color name="ic_launcher_background">#08090C</color>
+    <!-- Must stay in step with Theme.kt's background, or the launch window flashes a
+         different colour than the app settles on. The night variant is in values-night. -->
+    <color name="window_background">#F8FAFC</color>
+</resources>

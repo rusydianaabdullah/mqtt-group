@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Nothing leaves the device. The database key lives in the Keystore and does not survive a
+     restore, so a backed-up database would be undecryptable anyway; worse, the group key would
+     be sitting in a cloud backup. Opt out entirely. -->
+<full-backup-content>
+    <exclude domain="root" />
+    <exclude domain="database" />
+    <exclude domain="sharedpref" />
+    <exclude domain="file" />
+</full-backup-content>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Family Group</string>
+    <string name="app_tagline">Obrolan grup dan berbagi lokasi secara privat lewat MQTT</string>
+    <string name="channel_connection">Koneksi</string>
+    <string name="notification_connection_text">Berjalan di latar belakang</string>
+    <string name="channel_connection_description">Menjaga koneksi grup agar pesan tetap masuk saat aplikasi ditutup.</string>
+    <!-- Tentang -->
+    <string name="action_about">Tentang</string>
+    <string name="action_back">Kembali</string>
+    <string name="about_version_format">Versi %1$s</string>
+    <string name="about_tagline">Obrolan dan lokasi untuk orang-orang pilihan Anda, di server yang Anda kelola. Tanpa akun, dan tidak ada yang bisa kami baca.</string>
+    <string name="about_highlight_encrypted">Terenkripsi ujung-ke-ujung; broker hanya memindahkan data tersegel</string>
+    <string name="about_highlight_broker">Broker MQTT Anda sendiri, bisa satu untuk tiap grup</string>
+    <string name="about_highlight_map">Peta bersama dengan riwayat yang bisa diputar ulang, mati secara bawaan</string>
+    <string name="about_highlight_noaccount">Tanpa akun, tanpa nomor telepon, tanpa server milik kami</string>
+    <string name="about_next_title">Arah pengembangan berikutnya</string>
+    <string name="about_next_body">Aplikasi ini adalah purwarupa yang berfungsi penuh dari komunikator privat untuk sistem tertutup perusahaan — lokasi tambang, perkebunan, kapal, pabrik, atau proyek konstruksi. Tempat di mana jaringan adalah milik Anda sendiri, internet luar tidak dapat diandalkan atau sengaja ditiadakan, dan pesan maupun posisi kru tidak boleh keluar dari infrastruktur operator.</string>
+    <string name="about_contact_title">Sedang membangun sistem serupa?</string>
+    <string name="about_contact_body">Jika Anda ingin aplikasi ini disesuaikan dengan operasi Anda, atau ingin berdiskusi, silakan hubungi kami.</string>
+    <string name="action_visit_us">Hubungi kami</string>
+    <!-- Panggilan, fase 8: baru pensinyalan — belum ada suara, dan antarmukanya menyatakan itu. -->
+    <string name="call_incoming">Panggilan masuk</string>
+    <string name="call_calling">Memanggil\u2026</string>
+    <string name="call_ringing">Berdering\u2026</string>
+    <string name="call_connected">Tersambung</string>
+    <string name="call_unknown_caller">Seseorang di grup ini</string>
+    <string name="call_answer">Jawab</string>
+    <string name="call_decline">Tolak</string>
+    <string name="call_hang_up">Akhiri</string>
+    <string name="call_missed">Panggilan tak terjawab</string>
+    <string name="call_outcome_declined">Ditolak</string>
+    <string name="call_outcome_busy">Sedang menelepon yang lain</string>
+    <string name="call_outcome_cancelled">Panggilan dibatalkan</string>
+    <string name="call_outcome_unanswered">Tidak dijawab</string>
+    <string name="call_outcome_ended">Panggilan berakhir</string>
+    <string name="call_action">Panggil</string>
+    <string name="call_unavailable_offline">Belum tersambung ke broker, jadi panggilan ini tidak dapat dilakukan.</string>
+    <string name="call_fullscreen_title">Panggilan layar penuh</string>
+    <string name="call_fullscreen_body">Android tidak mengizinkan aplikasi ini menampilkan panggilan di layar kunci sampai Anda mengizinkannya. Tanpa itu, panggilan masuk tetap berdering dan muncul sebagai banner.</string>
+    <string name="call_fullscreen_action">Izinkan panggilan layar penuh</string>
+    <!-- Panggilan grup, fase 10. -->
+    <string name="call_group">Panggil satu grup</string>
+    <string name="call_group_ringing">Memanggil semua…</string>
+    <string name="call_in_room">%1$d orang di panggilan ini</string>
+    <string name="call_waiting_for_anyone">Menunggu ada yang menjawab…</string>
+    <string name="call_round_trip">lewat broker · %1$d ms pulang pergi</string>
+    <!-- Bunyikan, fase 11: bikin ponsel itu berbunyi, tidak lebih. -->
+    <string name="buzz_action">Bunyikan</string>
+    <string name="buzz_group">Bunyikan semua</string>
+    <string name="buzz_incoming">Membunyikan ponsel Anda</string>
+    <string name="buzz_outgoing">Membunyikan ponsel mereka</string>
+    <string name="buzz_outgoing_group">Membunyikan semua</string>
+    <string name="buzz_stop">Hentikan</string>
+    <string name="buzz_stopped">Dihentikan</string>
+    <string name="buzz_explains">Membunyikan ponsel mereka walau sedang senyap. Tanpa suara, tanpa panggilan — hanya bunyi, sampai ada yang menghentikannya.</string>
+    <string name="buzz_explains_group">Membunyikan semua ponsel di grup ini, walau sedang senyap. Tanpa suara, tanpa panggilan.</string>
+    <string name="member_card_admin">Admin grup ini</string>
+    <string name="member_card_removed">Sudah tidak ada di grup ini</string>
+    <string name="member_card_unseen">Belum terdengar kabarnya</string>
+    <string name="member_card_close">Tutup</string>
+</resources>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Family Group</string>
+    <string name="app_tagline">Private group chat and location sharing over MQTT</string>
+    <string name="channel_connection">Connection</string>
+    <string name="notification_connection_text">Running in the background</string>
+    <string name="channel_connection_description">Keeps the group connected so messages arrive while the app is closed.</string>
+    <!-- About -->
+    <string name="action_about">About</string>
+    <string name="action_back">Back</string>
+    <string name="about_version_format">Version %1$s</string>
+    <string name="about_tagline">Chat and location for the people you choose, on a server you run. No accounts, and nothing we can read.</string>
+    <string name="about_highlight_encrypted">End-to-end encrypted; the broker only moves sealed bytes</string>
+    <string name="about_highlight_broker">Your own MQTT broker, one per group if you want</string>
+    <string name="about_highlight_map">A shared map with history you can replay, off by default</string>
+    <string name="about_highlight_noaccount">No accounts, no phone numbers, no server of ours</string>
+    <string name="about_next_title">What this becomes next</string>
+    <string name="about_next_body">This app is a working prototype of a private communicator for enterprise closed systems — a mining site, a plantation, a vessel, a plant, a construction project. Places where the network is your own, the outside internet is unreliable or deliberately absent, and messages and crew positions must never leave the operator\'s infrastructure.</string>
+    <string name="about_contact_title">Building something like this?</string>
+    <string name="about_contact_body">If you would like this adapted to your own operation, or want to talk it through, please get in touch.</string>
+    <string name="action_visit_us">Contact us</string>
+    <!-- Calling, phase 8: signalling only — there is no audio yet, and the UI says so. -->
+    <string name="call_incoming">Incoming call</string>
+    <string name="call_calling">Calling\u2026</string>
+    <string name="call_ringing">Ringing\u2026</string>
+    <string name="call_connected">Connected</string>
+    <string name="call_unknown_caller">Someone in this group</string>
+    <string name="call_answer">Answer</string>
+    <string name="call_decline">Decline</string>
+    <string name="call_hang_up">Hang up</string>
+    <string name="call_missed">Missed call</string>
+    <string name="call_outcome_declined">Declined</string>
+    <string name="call_outcome_busy">On another call</string>
+    <string name="call_outcome_cancelled">Call cancelled</string>
+    <string name="call_outcome_unanswered">No answer</string>
+    <string name="call_outcome_ended">Call ended</string>
+    <string name="call_action">Call</string>
+    <string name="call_unavailable_offline">Not connected to the broker, so this call cannot be placed.</string>
+    <string name="call_fullscreen_title">Full-screen calls</string>
+    <string name="call_fullscreen_body">Android does not let this app show a call over your lock screen until you allow it. Without it, an incoming call still rings and appears as a banner.</string>
+    <string name="call_fullscreen_action">Allow full-screen calls</string>
+    <!-- Group calls, phase 10. -->
+    <string name="call_group">Call the group</string>
+    <string name="call_group_ringing">Ringing everyone…</string>
+    <string name="call_in_room">%1$d in this call</string>
+    <string name="call_waiting_for_anyone">Waiting for someone to answer…</string>
+    <string name="call_round_trip">via broker · %1$d ms round trip</string>
+    <!-- Buzz, phase 11: make that phone ring, and nothing else. -->
+    <string name="buzz_action">Buzz</string>
+    <string name="buzz_group">Buzz everyone</string>
+    <string name="buzz_incoming">Buzzing your phone</string>
+    <string name="buzz_outgoing">Buzzing their phone</string>
+    <string name="buzz_outgoing_group">Buzzing everyone</string>
+    <string name="buzz_stop">Stop</string>
+    <string name="buzz_stopped">Stopped</string>
+    <string name="buzz_explains">Rings their phone even if it is on silent. No voice, no call — just a noise, until somebody stops it.</string>
+    <string name="buzz_explains_group">Rings every phone in this group, even on silent. No voice, no call.</string>
+    <string name="member_card_admin">Admin of this group</string>
+    <string name="member_card_removed">No longer in this group</string>
+    <string name="member_card_unseen">Not heard from yet</string>
+    <string name="member_card_close">Close</string>
+</resources>

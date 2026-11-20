@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Status-bar icons are a single-colour silhouette, so this is the launcher pin flattened:
+     no dots, since they vanish at 24dp. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal">
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M12,2 a7,7 0 0,0 -7,7 c0,5 7,13 7,13 c0,0 7,-8 7,-13 a7,7 0 0,0 -7,-7 z
+                          M12,6.5 a2.5,2.5 0 1,1 0,5 a2.5,2.5 0 0,1 0,-5 z" />
+</vector>

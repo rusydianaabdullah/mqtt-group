@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Themed icons are tinted a single colour, so neither the bubble nor the ring's middle can be
+     a darker fill — both have to be actual holes. Same mark, cut rather than layered.
+
+     The dots are dropped here. In the coloured icon they are a lighter blue against navy; in one
+     flat colour they would merge into the pin and turn the bubble into a smudge, and a bubble
+     read as empty is better than a bubble read as dirty. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M54,54 m-33,0 a33,33 0 1,0 66,0 a33,33 0 1,0 -66,0 z
+                          M54,54 m-28,0 a28,28 0 1,0 56,0 a28,28 0 1,0 -56,0 z" />
+
+    <!-- Scaled to match ic_launcher_foreground's padding, so the themed icon keeps the same
+         silhouette and margins as the coloured one. -->
+    <group
+        android:pivotX="54"
+        android:pivotY="54"
+        android:scaleX="0.68"
+        android:scaleY="0.68">
+        <path
+            android:fillColor="#FFFFFF"
+            android:fillType="evenOdd"
+            android:pathData="M54,20
+                              C41.3,20 31,30.3 31,43
+                              C31,52.5 37.5,63.5 54,88
+                              C70.5,63.5 77,52.5 77,43
+                              C77,30.3 66.7,20 54,20 Z
+                              M42,33 h24 a5,5 0 0,1 5,5 v13 a5,5 0 0,1 -5,5 h-13 l-8,7 v-7 h-3
+                              a5,5 0 0,1 -5,-5 v-13 a5,5 0 0,1 5,-5 z" />
+    </group>
+</vector>

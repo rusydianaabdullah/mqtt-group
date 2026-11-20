@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Only these two cache subfolders are exposed, and only for as long as a grant lasts: one the
+     camera capture writes into, one a shared attachment is briefly decrypted into so the share
+     sheet's target app has a content:// uri to read. -->
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <cache-path name="camera" path="camera/" />
+    <cache-path name="shared" path="shared/" />
+</paths>

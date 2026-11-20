@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Deep navy with a faint diagonal lift, so the icon does not disappear into a dark wallpaper
+     as a flat rectangle. Navy rather than the near-black it used to be: the ring and pin in
+     front of it are a bright blue, and blue on blue-black is what gives the mark its depth
+     instead of the harsh cut-out that black produced. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:pathData="M0,0h108v108h-108z">
+        <aapt:attr xmlns:aapt="http://schemas.android.com/aapt" name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="0" android:startY="0"
+                android:endX="108" android:endY="108">
+                <item android:offset="0" android:color="#FF13254E" />
+                <item android:offset="1" android:color="#FF070F22" />
+            </gradient>
+        </aapt:attr>
+    </path>
+</vector>

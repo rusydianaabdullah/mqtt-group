@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Ringing an incoming call over the lock screen.
+
+         Declaring it is no longer enough. Up to Android 13 this was granted at install; from 14
+         the system grants it only to apps it already considers calling or alarm apps, and an
+         installer has no way to know that this one is. Everyone else has to be sent to Settings
+         by the person, which SettingsScreen offers once and never nags about.
+
+         So the incoming-call notification is built to work without it — CallStyle on a
+         high-importance channel still rings, still buzzes and still appears on the lock screen —
+         and the full screen is attached as an upgrade where it will be honoured. The other way
+         round is a feature that is silently broken on most phones. See AndroidCallNotifier. -->
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <!-- The ring. The notification channel that carries a call is deliberately silent, because
+         a channel sound plays once and cannot loop, which is a chime rather than a ringtone —
+         so AndroidRinger plays and stops both the ringtone and this. -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- Reading invite QR codes and taking a chat photo. Optional, so the app still installs on
+         a device without a camera — that phone can be invited by pasted code and send gallery
+         photos instead. -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera.any" android:required="false" />
+    <!-- Voice notes, and nothing else. Recording happens only while the mic button is held
+         down, so there is no foreground-service audio type here to go with it: this app carries
+         no voice call, and a permission it cannot exercise is one Play would rightly ask about.
+         See Call.Mode — an inbound audio offer is dropped rather than rung. -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- So the background connection comes back after a reboot without anyone opening the app. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Lets Settings show the "let this app run in the background" prompt some OEMs otherwise
+         hide entirely — the other common reason a background connection goes quiet on some
+         devices and not others. -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <!-- Location sharing. Asked for only at the moment someone turns their own sharing on for a
+         group, never at install or first run, so an install that only chats is never prompted.
+         COARSE is declared alongside FINE because Android 12+ lets the user grant only the
+         approximate one from the same dialog; the engine takes whichever it gets.
+
+         ACCESS_BACKGROUND_LOCATION is deliberately NOT declared. Sharing continues with the app
+         closed because it runs inside a foreground service typed `location` with a permanent
+         notification, which may use location for as long as it runs — the background permission
+         adds nothing to that. What it does add is Play's heaviest review: a written
+         justification and a demonstration video, for a capability the app would then have to
+         request in a second, separate trip to Settings that nothing here ever made.
+
+         The cost is honest and small: BootReceiver and ConnectionKeepAliveWorker start the
+         service from the background, and those restarts sync messages but cannot read a
+         position until the app is next opened. An overnight reboot means positions resume in
+         the morning. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+
+    <application
+        android:name=".FamilyGroupApp"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.FamilyGroup">
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- The call, full screen and over the lock screen.
+
+             Its own task (singleInstance) rather than a screen inside MainActivity: it has to be
+             able to come up over the keyguard without unlocking the phone, and it must not end
+             up on the back stack of whatever the person was doing, where backing out of a
+             ringing call would silently leave the other end waiting.
+
+             excludeFromRecents because a finished call has no business being reopened from the
+             task switcher — there is nothing there to return to. -->
+        <activity
+            android:name=".ui.CallActivity"
+            android:exported="false"
+            android:launchMode="singleInstance"
+            android:excludeFromRecents="true"
+            android:showOnLockScreen="true"
+            android:turnScreenOn="true"
+            android:taskAffinity=""
+            android:theme="@style/Theme.FamilyGroup" />
+
+        <!-- Answer and decline straight from the notification, without the screen coming up.
+             A receiver rather than an activity so that answering on a locked phone does not
+             first require unlocking it — the moment someone is least able to. -->
+        <receiver
+            android:name=".call.CallActionReceiver"
+            android:exported="false" />
+
+        <!-- Holds the MQTT connection so messages arrive while the app is closed, and the
+             location engine alongside it — one service, one notification, one wakelock rather
+             than a second copy of all of that.
+
+             stopWithTask=false matters: a plain Service (foreground or not) is stopped by
+             Android the moment its task is swiped away from Recents unless it says otherwise.
+             Without this, "closing the app" silently killed the connection and every
+             notification along with it — the opposite of what a foreground service showing a
+             persistent notification is supposed to promise. -->
+        <service
+            android:name=".mqtt.MqttService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync|location"
+            android:stopWithTask="false" />
+
+        <!-- Restarts the connection after a reboot. BOOT_COMPLETED is a protected broadcast, so
+             this needs no intent filter permission beyond exported=true for the system to reach
+             it. -->
+        <receiver
+            android:name=".mqtt.BootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- A wake-up bell, not a transport: nothing this app sends over FCM carries anything
+             worth reading, so onMessageReceived only has to bring the MQTT connection up.
+
+             A chat push carries a real "notification" payload, which is what lets Android show
+             something while the app is fully backgrounded with none of this code running. A
+             call push deliberately carries none, because that same convenience is what would
+             stop the phone ever ringing: when a notification payload is present and the app is
+             backgrounded, the OS draws it itself and onMessageReceived never runs. See
+             PushSender.notifyCall and fcm-service's README. -->
+        <service
+            android:name=".push.PushMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!-- The camera app needs a content:// uri to write a full-resolution photo to, and a
+             file:// path handed across app boundaries is a crash on modern Android. -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+</manifest>

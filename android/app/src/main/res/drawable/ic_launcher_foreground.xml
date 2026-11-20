@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A map pin whose head is a speech bubble, inside a ring: the two halves of the app in one
+     mark, with the ring reading as the area around you that the map is watching.
+
+     The pin is a step brighter than the UI's blue. An icon is seen at 48dp against an unknown
+     wallpaper, where #2563EB on black goes murky; the brighter tone holds its shape.
+
+     The bubble is a hole rather than a dark fill, so the background shows through it and the
+     monochrome layer can be the same geometry rather than a separate drawing. Same for the
+     ring, which is a filled annulus rather than a stroke — a stroked path is scaled by the
+     launcher along with everything else and goes spindly at small sizes, while an annulus keeps
+     its weight. Everything sits inside the 18..90 safe zone that every launcher mask keeps. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- The ring. Outer radius 33 is the edge of the 66dp circle every launcher mask is
+         guaranteed to keep — a circular mask crops at 36 and a squircle bites in further than
+         that at the diagonals, so a ring drawn out to 35 comes back with flat spots. The 5 of
+         thickness is what still reads as a ring rather than a hairline once the whole icon has
+         been shrunk to 48dp. -->
+    <path
+        android:fillType="evenOdd"
+        android:pathData="M54,54 m-33,0 a33,33 0 1,0 66,0 a33,33 0 1,0 -66,0 z
+                          M54,54 m-28,0 a28,28 0 1,0 56,0 a28,28 0 1,0 -56,0 z">
+        <aapt:attr xmlns:aapt="http://schemas.android.com/aapt" name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="18" android:startY="18"
+                android:endX="90" android:endY="90">
+                <item android:offset="0" android:color="#FF5AB2FF" />
+                <item android:offset="1" android:color="#FF2B86F5" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Scaled to 0.68 about the icon's centre so the whole pin clears the ring's inner edge:
+         at that size the bubble's widest point is 15.6 from the axis where the ring's inner
+         radius allows 26.7 at that height, and the tip stops 4.6 short of the bottom. -->
+    <group
+        android:pivotX="54"
+        android:pivotY="54"
+        android:scaleX="0.68"
+        android:scaleY="0.68">
+        <path
+            android:fillType="evenOdd"
+            android:pathData="M54,20
+                              C41.3,20 31,30.3 31,43
+                              C31,52.5 37.5,63.5 54,88
+                              C70.5,63.5 77,52.5 77,43
+                              C77,30.3 66.7,20 54,20 Z
+                              M42,33 h24 a5,5 0 0,1 5,5 v13 a5,5 0 0,1 -5,5 h-13 l-8,7 v-7 h-3
+                              a5,5 0 0,1 -5,-5 v-13 a5,5 0 0,1 5,-5 z">
+            <aapt:attr xmlns:aapt="http://schemas.android.com/aapt" name="android:fillColor">
+                <gradient
+                    android:type="linear"
+                    android:startX="31" android:startY="20"
+                    android:endX="77" android:endY="88">
+                    <item android:offset="0" android:color="#FF56AEFF" />
+                    <item android:offset="1" android:color="#FF2B86F5" />
+                </gradient>
+            </aapt:attr>
+        </path>
+
+        <!-- Three voices floating in the punched-out bubble, a shade lighter than the pin so
+             they lift off the navy showing through rather than sitting flat on it. -->
+        <path
+            android:fillColor="#FF7DD8F7"
+            android:pathData="M45.5,41 m-3.2,0 a3.2,3.2 0 1,0 6.4,0 a3.2,3.2 0 1,0 -6.4,0 z
+                              M54,41 m-3.2,0 a3.2,3.2 0 1,0 6.4,0 a3.2,3.2 0 1,0 -6.4,0 z
+                              M62.5,41 m-3.2,0 a3.2,3.2 0 1,0 6.4,0 a3.2,3.2 0 1,0 -6.4,0 z" />
+    </group>
+</vector>
